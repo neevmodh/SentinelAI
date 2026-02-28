@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelAI - Early Warning Cyber Defense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="shield">🛡️</span>
+                <h1>SentinelAI</h1>
+            </div>
+            <p class="tagline">Early Warning Cyber Defense</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <h2>📧 Analyze Message</h2>
+                
+                <div class="demo-mode-toggle">
+                    <button id="demoModeBtn" class="btn-demo">
+                        <span class="demo-icon">🎯</span> Demo Attack Mode
+                    </button>
+                </div>
+                
+                <div id="demoExamples" class="demo-examples hidden">
+                    <h4>Select Example:</h4>
+                    <div class="demo-buttons">
+                        <button class="demo-example-btn safe" data-type="safe">
+                            ✓ Safe Email
+                        </button>
+                        <button class="demo-example-btn medium" data-type="medium">
+                            ⚠️ Medium Risk
+                        </button>
+                        <button class="demo-example-btn danger" data-type="danger">
+                            🚨 High Risk Phishing
+                        </button>
+                    </div>
+                </div>
+                
+                <textarea id="messageInput" placeholder="Paste suspicious email or message here for analysis..."></textarea>
+                <button id="analyzeBtn" class="btn-primary">Analyze Threat</button>
+            </div>
+
+            <div class="analysis-panel">
+                <h2>📊 Real-Time Analysis</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalScans">0</div>
+                        <div class="stat-label">Total Scans</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="threatsDetected">0</div>
+                        <div class="stat-label">Threats Detected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="safeMsgs">0</div>
+                        <div class="stat-label">Safe Messages</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="resultsSection" class="results-section hidden">
+            <div class="threat-indicator">
+                <div id="threatStatus" class="status"></div>
+                <div class="score-container">
+                    <canvas id="threatChart"></canvas>
+                    <div id="scoreValue" class="score-value"></div>
+                </div>
+            </div>
+
+            <div class="cognitive-analysis">
+                <h3>🧠 Cognitive Manipulation Analysis</h3>
+                
+                <div class="risk-meter-container">
+                    <div class="risk-meter-label">Overall Risk Level</div>
+                    <div id="riskMeter" class="risk-meter">
+                        <div id="riskMeterFill" class="risk-meter-fill"></div>
+                        <div id="riskMeterText" class="risk-meter-text"></div>
+                    </div>
+                </div>
+                
+                <div class="cognitive-score-display">
+                    <div class="score-label">Cognitive Exploit Score</div>
+                    <div id="cognitiveScoreValue" class="cognitive-score-value"></div>
+                </div>
+                
+                <div class="radar-container">
+                    <canvas id="radarChart"></canvas>
+                </div>
+                
+                <div id="featureImportance" class="feature-importance">
+                    <h4>🎯 Key Threat Indicators</h4>
+                    <ul id="featureList"></ul>
+                </div>
+            </div>
+
+            <div id="teachbackSection" class="teachback-section hidden">
+                <h3>🎓 Teach-Back: Understanding the Threat</h3>
+                
+                <div class="teachback-card">
+                    <div class="teachback-label">⚠️ Why This Is Dangerous</div>
+                    <div id="whyDangerous" class="teachback-content"></div>
+                </div>
+                
+                <div class="teachback-card">
+                    <div class="teachback-label">🎯 What the Attacker Wants</div>
+                    <div id="attackerGoal" class="teachback-content"></div>
+                </div>
+                
+                <div class="teachback-card">
+                    <div class="teachback-label">✅ What You Should Do Instead</div>
+                    <div id="whatToDo" class="teachback-content"></div>
+                </div>
+                
+                <div class="teachback-card safety-tip">
+                    <div class="teachback-label">💡 30-Second Safety Tip</div>
+                    <div id="safetyTip" class="teachback-content"></div>
+                </div>
+            </div>
+
+            <div class="digital-hygiene-section">
+                <h3>🧼 Digital Hygiene Companion</h3>
+                <div class="security-insight-card">
+                    <div class="insight-header">
+                        <span id="insightIcon" class="insight-icon">💡</span>
+                        <span class="insight-title-label">Today's Security Insight</span>
+                    </div>
+                    <h4 id="insightTitle" class="insight-title"></h4>
+                    <p id="insightTip" class="insight-tip"></p>
+                    <button id="newInsightBtn" class="btn-secondary">Get New Insight</button>
+                </div>
+            </div>
+
+            <div id="explainableSection" class="explainable-section hidden">
+                <h3>🔬 Explainable Security Analysis</h3>
+                <div class="explainable-content">
+                    <div class="suspicious-words-container">
+                        <h4>🚩 Suspicious Words & Phrases Detected</h4>
+                        <div id="suspiciousWordsList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback-section">
+                <h3>🔍 Detection Details</h3>
+                <ul id="feedbackList"></ul>
+            </div>
+
+            <div class="recommendations">
+                <h3>🔒 Recommended Actions</h3>
+                <ul id="recommendationsList"></ul>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-mission">
+                <p class="mission-statement">SentinelAI does not just detect threats — it teaches users how to think critically in the face of cyber manipulation.</p>
+            </div>
+            <div class="footer-tech">
+                <p>Powered by Machine Learning & NLP | Stay Vigilant, Stay Safe</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
