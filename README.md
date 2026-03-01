@@ -483,9 +483,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-- **Email**: your.email@example.com
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **LinkedIn**: [Your Name](https://linkedin.com/in/yourprofile)
+- **Email**: neevmodh205@gamil.com
+- **GitHub**: [@neevmodh](https://github.com/neevmodh)
+- **LinkedIn**: [Neev Modh](https://www.linkedin.com/in/neev-modh-43478a285/)
 
 ---
 
